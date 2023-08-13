@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ahmet\\Documents\\GitHub\\FoodDelivery\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj": {}
+    "C:\\Users\\ahmet\\Desktop\\BilgeAdamHomeWork\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ahmet\\Documents\\GitHub\\FoodDelivery\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj": {
+    "C:\\Users\\ahmet\\Desktop\\BilgeAdamHomeWork\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ahmet\\Documents\\GitHub\\FoodDelivery\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj",
+        "projectUniqueName": "C:\\Users\\ahmet\\Desktop\\BilgeAdamHomeWork\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj",
         "projectName": "FoodDelivery",
-        "projectPath": "C:\\Users\\ahmet\\Documents\\GitHub\\FoodDelivery\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj",
+        "projectPath": "C:\\Users\\ahmet\\Desktop\\BilgeAdamHomeWork\\FoodDelivery\\FoodDelivery\\FoodDelivery.csproj",
         "packagesPath": "C:\\Users\\ahmet\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ahmet\\Documents\\GitHub\\FoodDelivery\\FoodDelivery\\FoodDelivery\\obj\\",
+        "outputPath": "C:\\Users\\ahmet\\Desktop\\BilgeAdamHomeWork\\FoodDelivery\\FoodDelivery\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ahmet\\AppData\\Roaming\\NuGet\\NuGet.Config",
