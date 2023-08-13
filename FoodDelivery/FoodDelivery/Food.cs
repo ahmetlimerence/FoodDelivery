@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FoodDelivery
 {
-    internal class Food : Product
+    internal class Food
     {
         
     }
