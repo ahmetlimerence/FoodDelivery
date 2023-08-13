@@ -11,5 +11,11 @@ namespace FoodDelivery
     {
         protected string _username;
         protected string _password;
+
+        public User(string username,string password)
+        {
+            _username = username;
+            _password = password;
+        }
     }
 }

@@ -82,6 +82,16 @@ namespace FoodDelivery
             return _basket.First(_product => _product.Key.Name == product.Name).Key;
         }
 
+        private double SumOfBasket()
+        {
+            double sum = 0;
+            foreach (Product product in _basket.Keys)
+            {
+                sum += (product.Price * _basket[FindSameProduct(product)]);
+            }
+            return sum;
+
+        }
        
     }
 }
