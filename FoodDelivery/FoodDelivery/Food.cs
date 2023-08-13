@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace FoodDelivery
 {
-    internal class Food
+    internal class Food : Product
     {
-        
+        public Food(double price, string name, string cooker) : base(price, name, cooker)
+        {
+
+        }
     }
 }

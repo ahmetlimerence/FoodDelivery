@@ -5,18 +5,21 @@ using System.Linq;
 using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace FoodDelivery
 {
     internal class Customer :User
     {
         Dictionary<Product,int> _basket;
-        public double Balance { get; private set; }
-        public Customer(string username,string password)
+        private double _balance;
+
+        public Customer(string username, string password) : base(username, password)
         {
-            _username = username;
-            _password = password;
+
         }
+
+        
 
         private bool IsBasketValid(Dictionary<Product,int> basket)
         {
@@ -29,12 +32,56 @@ namespace FoodDelivery
            
         }
 
-        private void AddToBasket(Product product)
+        private void AddProduct(Product product)
         {
-            if(!_basket.TryAdd(product,1))
+            if (IsBasketHasProduct(product))
             {
-                _basket[product] += 1;
+                _basket[FindSameProduct(product)]++;
+            }
+            else
+                return;
+        }
+
+        private void RemoveProduct(Product product)
+        {
+            if(IsBasketHasProduct(product))
+            {
+                _basket[FindSameProduct(product)]--;
+                if (_basket[FindSameProduct(product)] < 1)
+                {
+                    _basket.Remove(FindSameProduct(product));
+                }
             }
         }
+       
+        public void LoadBalance(double amounth)
+        {
+            if (amounth > 0)
+                _balance += amounth;
+            else
+                throw new Exception("Amounth is not valid");
+        }
+
+        public void MakePayment(Cooker cooker, double amounth)
+        {
+            if(this._balance >= amounth)
+            {
+                cooker.GetPayment(amounth);
+            }
+            else
+                throw new Exception("No  Money");
+        }
+
+        private bool IsBasketHasProduct(Product product)
+        {
+            return _basket.All(_product => _product.Key.Name == product.Name);
+        }
+
+        private Product FindSameProduct(Product product)
+        {
+            return _basket.First(_product => _product.Key.Name == product.Name).Key;
+        }
+
+       
     }
 }
