@@ -10,77 +10,45 @@ namespace FoodDelivery
     internal class Cooker : User
     {
         private Dictionary<Product, int> _menu;
-        private double _balance;
-        public string CookerName;
         public Cooker(string username, string password) : base(username, password)
         {
-        }
-        public void GetPayment(double amounth)
-        {
-            _balance += amounth;
+            _menu = new Dictionary<Product, int>();
         }
 
-        private void AddFoodToMenu(string name,int count,double price)
+        public void AddFoodToMenu(Product product,int count = 1)
         {
-            _menu.Add(new Food(price, name, CookerName),count);
+            if(IsMenuHasProduct(product))
+            {
+                _menu[FindSameProductInMenu(product)] += count;
+            }
+            else
+            {
+                _menu.Add(product, count);
+            }
+        }
+
+        private bool IsMenuHasProduct(Product product)
+        {
+            Product temp = _menu.FirstOrDefault(_product => _product.Key.Name == product.Name).Key;
+            if(temp is null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
+
+        private Product FindSameProductInMenu(Product product)
+        {
+           return _menu.FirstOrDefault(_product => _product.Key.Name == product.Name).Key;
         }
 
         public Dictionary<Product,int> GetMenu()
         {
             return _menu;
         }
-
-        private void RemoveProductFromMenu(Product product)
-        {
-            if(IsMenuHasProduct(product))
-            {
-                _menu.Remove(FindSameProduct(product));
-                return;
-            }
-            return;
-        }
-
-        private void DecreaseProduct(Product key, int count)
-        {
-            if(IsMenuHasProduct(key))
-            {
-                if(_menu[FindSameProduct(key)] > count)
-                {
-                    _menu[FindSameProduct(key)] -= count;
-                }
-                else if (_menu[FindSameProduct(key)] == count)
-                {
-                    RemoveProductFromMenu(key);
-                }
-                else
-                {
-                    return;
-                }
-
-            }
-        }
-
-        private void IncreaseProduct(Product key , int count = 1)
-        {
-            if(IsMenuHasProduct(key))
-            {
-                _menu[FindSameProduct(key)] += count;
-            }
-            else
-            {
-                AddFoodToMenu(key.Name, count, key.Price);
-            }
-        }
-
-        private bool IsMenuHasProduct(Product product)
-        {
-            return _menu.All(_product => _product.Key.Name == product.Name);
-        }
-
-        private Product FindSameProduct(Product product)
-        {
-            return _menu.First(_product => _product.Key.Name == product.Name).Key;
-        }
-
     }
 }

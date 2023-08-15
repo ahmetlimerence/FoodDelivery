@@ -11,15 +11,15 @@ namespace FoodDelivery
 {
     internal class Customer :User
     {
-        Dictionary<Product,int> _basket;
+        public Dictionary<Product, int> _basket;
         private double _balance;
 
         public Customer(string username, string password) : base(username, password)
         {
-
+            _basket = new Dictionary<Product, int>();
         }
 
-        
+       
 
         private bool IsBasketValid(Dictionary<Product,int> basket)
         {
@@ -32,14 +32,21 @@ namespace FoodDelivery
            
         }
 
-        private void AddProduct(Product product)
+        public void AddProduct(Product product)
         {
             if (IsBasketHasProduct(product))
             {
-                _basket[FindSameProduct(product)]++;
+                var p = FindSameProduct(product);
+
+                if (p != null)
+                    _basket[p]++;
+                else
+                {
+                    _basket.Add(product, 1);
+                    return;
+                }
             }
-            else
-                return;
+           
         }
 
         private void RemoveProduct(Product product)
@@ -62,15 +69,7 @@ namespace FoodDelivery
                 throw new Exception("Amounth is not valid");
         }
 
-        public void MakePayment(Cooker cooker, double amounth)
-        {
-            if(this._balance >= amounth)
-            {
-                cooker.GetPayment(amounth);
-            }
-            else
-                throw new Exception("No  Money");
-        }
+        
 
         private bool IsBasketHasProduct(Product product)
         {
@@ -79,10 +78,12 @@ namespace FoodDelivery
 
         private Product FindSameProduct(Product product)
         {
-            return _basket.First(_product => _product.Key.Name == product.Name).Key;
+            Console.WriteLine(_basket.FirstOrDefault(_product => _product.Key.Name == product.Name));
+
+            return _basket.FirstOrDefault(_product => _product.Key.Name == product.Name).Key;
         }
 
-        private double SumOfBasket()
+        public double SumOfBasket()
         {
             double sum = 0;
             foreach (Product product in _basket.Keys)
@@ -92,6 +93,8 @@ namespace FoodDelivery
             return sum;
 
         }
+
+     
        
     }
 }
