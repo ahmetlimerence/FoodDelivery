@@ -11,10 +11,10 @@ internal class Program
         Product product1 = new Food(10,"salata","adminCooker");
         Product product2 = new Food(20,"pilav","adminCooker");
 
-        customer.AddProduct(product1);
-        customer.AddProduct(product2);
-        customer.AddProduct(product);
-        customer.AddProduct(product1);
+        customer.AddProductToBasket(product1);
+        customer.AddProductToBasket(product2);
+        customer.AddProductToBasket(product);
+        customer.AddProductToBasket(product1);
 
         cooker.AddFoodToMenu(product1);
         cooker.AddFoodToMenu(product1);
@@ -32,10 +32,12 @@ internal class Program
             Console.WriteLine(val);
         }
 
-        foreach(int val in customer._basket.Values)
+        foreach(int val in customer.GetBasket().Values)
         {
             Console.WriteLine(val);
         }
+
+        
     }
 
 

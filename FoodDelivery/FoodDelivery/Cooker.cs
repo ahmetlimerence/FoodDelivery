@@ -10,6 +10,7 @@ namespace FoodDelivery
     internal class Cooker : User
     {
         private Dictionary<Product, int> _menu;
+        private double _balance;
         public Cooker(string username, string password) : base(username, password)
         {
             _menu = new Dictionary<Product, int>();
@@ -73,6 +74,14 @@ namespace FoodDelivery
         public Dictionary<Product,int> GetMenu()
         {
             return _menu;
+        }
+
+        public void GetPayment(double amounth)
+        {
+            if(amounth >= 0)
+            {
+                _balance += amounth;
+            }
         }
     }
 }

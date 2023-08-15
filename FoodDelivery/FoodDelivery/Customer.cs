@@ -14,6 +14,14 @@ namespace FoodDelivery
         private Dictionary<Product, int> _basket;
         private double _balance;
 
+        public void LoadBalance(double amounth)
+        {
+            if (amounth > 0)
+                _balance += amounth;
+            else
+                return;
+        }
+
         public Customer(string username, string password) : base(username, password)
         {
             _basket = new Dictionary<Product, int>();
@@ -37,6 +45,26 @@ namespace FoodDelivery
 
         }
 
+        public void DecreaseProductCount(Product product, int count = 1)
+        {
+            if (IsBasketHasProduct(product))
+            {
+                _basket[FindSameProductInBasket(product)] -= count;
+                if (_basket[FindSameProductInBasket(product)] <= 0)
+                {
+                    DeleteProductFromBasket(product);
+                }
+            }
+        }
+
+        public void DeleteProductFromBasket(Product product)
+        {
+            if(IsBasketHasProduct(product))
+            {
+                _basket.Remove(FindSameProductInBasket(product));
+            }
+        }
+
         private bool IsBasketHasProduct(Product prodcut)
         {
             Product temp = _basket.FirstOrDefault(_product => _product.Key.Name == prodcut.Name).Key;
@@ -53,6 +81,11 @@ namespace FoodDelivery
         private Product FindSameProductInBasket(Product product)
         {
             return _basket.FirstOrDefault(_product => _product.Key.Name == product.Name).Key;
+        }
+
+        public void MakePayment(Cooker cooker, double amounth)
+        {
+            cooker.GetPayment(amounth);
         }
     }
 }
