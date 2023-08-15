@@ -11,7 +11,7 @@ namespace FoodDelivery
 {
     internal class Customer :User
     {
-        public Dictionary<Product, int> _basket;
+        private Dictionary<Product, int> _basket;
         private double _balance;
 
         public Customer(string username, string password) : base(username, password)
@@ -19,82 +19,40 @@ namespace FoodDelivery
             _basket = new Dictionary<Product, int>();
         }
 
-       
-
-        private bool IsBasketValid(Dictionary<Product,int> basket)
+        public Dictionary<Product, int> GetBasket()
         {
-            if (basket.Count > 0)
-            {
-                string cookerName = basket.First().Key.CookerUserName;
-                return (basket.All(Product => Product.Key.CookerUserName == cookerName));
-            }
-            return false;
-           
+            return _basket;
         }
 
-        public void AddProduct(Product product)
+        public void AddProductToBasket(Product product,int count = 1)
         {
             if (IsBasketHasProduct(product))
             {
-                var p = FindSameProduct(product);
-
-                if (p != null)
-                    _basket[p]++;
-                else
-                {
-                    _basket.Add(product, 1);
-                    return;
-                }
+                _basket[FindSameProductInBasket(product)] += count;
             }
-           
-        }
-
-        private void RemoveProduct(Product product)
-        {
-            if(IsBasketHasProduct(product))
-            {
-                _basket[FindSameProduct(product)]--;
-                if (_basket[FindSameProduct(product)] < 1)
-                {
-                    _basket.Remove(FindSameProduct(product));
-                }
-            }
-        }
-       
-        public void LoadBalance(double amounth)
-        {
-            if (amounth > 0)
-                _balance += amounth;
             else
-                throw new Exception("Amounth is not valid");
+            {
+                _basket.Add(product, count);
+            }
+
         }
 
-        
-
-        private bool IsBasketHasProduct(Product product)
+        private bool IsBasketHasProduct(Product prodcut)
         {
-            return _basket.All(_product => _product.Key.Name == product.Name);
+            Product temp = _basket.FirstOrDefault(_product => _product.Key.Name == prodcut.Name).Key;
+            if (temp is null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        private Product FindSameProduct(Product product)
+        private Product FindSameProductInBasket(Product product)
         {
-            Console.WriteLine(_basket.FirstOrDefault(_product => _product.Key.Name == product.Name));
-
             return _basket.FirstOrDefault(_product => _product.Key.Name == product.Name).Key;
         }
-
-        public double SumOfBasket()
-        {
-            double sum = 0;
-            foreach (Product product in _basket.Keys)
-            {
-                sum += (product.Price * _basket[FindSameProduct(product)]);
-            }
-            return sum;
-
-        }
-
-     
-       
     }
 }

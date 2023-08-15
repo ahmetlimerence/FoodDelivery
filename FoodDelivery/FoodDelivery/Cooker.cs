@@ -41,6 +41,30 @@ namespace FoodDelivery
 
         }
 
+        public void DecreaseProductCountFromMenu(Product product, int count = 1)
+        {
+            if(IsMenuHasProduct(product))
+            {
+                _menu[FindSameProductInMenu(product)] -= count;
+                if (_menu[FindSameProductInMenu(product)] <= 0)
+                {
+                    _menu.Remove(FindSameProductInMenu(product));
+                }
+            }
+        }
+
+        private void RemoveProductFromMenu(Product product)
+        {
+            if(IsMenuHasProduct(product))
+            {
+                _menu.Remove(product);
+            }
+            else
+            {
+                return;
+            }
+        }
+
         private Product FindSameProductInMenu(Product product)
         {
            return _menu.FirstOrDefault(_product => _product.Key.Name == product.Name).Key;

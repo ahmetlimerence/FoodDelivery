@@ -24,7 +24,15 @@ internal class Program
         cooker.AddFoodToMenu(product2);
         cooker.AddFoodToMenu(product);
 
+
+        cooker.DecreaseProductCountFromMenu(product1, 5);
+
         foreach(int val in cooker.GetMenu().Values)
+        {
+            Console.WriteLine(val);
+        }
+
+        foreach(int val in customer._basket.Values)
         {
             Console.WriteLine(val);
         }
