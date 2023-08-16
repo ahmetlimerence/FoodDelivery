@@ -11,13 +11,13 @@ namespace FoodDelivery
     {
         public double Price { get; private set; }
         public string Name { get; private set; }
-        public  string CookerUserName { get; private set; }
+        public  Cooker Cooker { get; private set; }
 
-        public Product(double price, string name, string cooker)
+        public Product(double price, string name, Cooker cooker)
         {
             Price = price;
             Name = name;
-            CookerUserName = cooker;
+            Cooker = cooker;
         }
     }
 }

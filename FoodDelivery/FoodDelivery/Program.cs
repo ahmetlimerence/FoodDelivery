@@ -7,9 +7,9 @@ internal class Program
     {
         Customer customer = new Customer("admin","admin");
         Cooker cooker = new Cooker("admin", "admin");
-        Product product = new Food(19,"Makarna","adminCooker");
-        Product product1 = new Food(10,"salata","adminCooker");
-        Product product2 = new Food(20,"pilav","adminCooker");
+        Product product = new Food(19,"Makarna",cooker);
+        Product product1 = new Food(10,"salata",cooker);
+        Product product2 = new Food(20,"pilav",cooker);
 
         customer.AddProductToBasket(product1);
         customer.AddProductToBasket(product2);

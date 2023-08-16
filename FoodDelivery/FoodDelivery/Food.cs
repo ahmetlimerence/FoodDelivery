@@ -8,7 +8,7 @@ namespace FoodDelivery
 {
     internal class Food : Product
     {
-        public Food(double price, string name, string cooker) : base(price, name, cooker)
+        public Food(double price, string name, Cooker cooker) : base(price, name, cooker)
         {
 
         }

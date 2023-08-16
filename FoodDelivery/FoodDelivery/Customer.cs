@@ -87,5 +87,46 @@ namespace FoodDelivery
         {
             cooker.GetPayment(amounth);
         }
+
+        private bool IsBasketValid()
+        {
+            if(_basket.Count > 0)
+            {
+                Cooker temp = _basket.First().Key.Cooker;
+                foreach (var item in _basket.Keys) 
+                { 
+                    if(item.Cooker != temp)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private double GetSumTotalBasket()
+        {
+            double sum = 0;
+            foreach (var item in _basket.Keys) 
+            {
+                sum += (item.Price * _basket[item]);
+            }
+            return sum;
+        }
+
+        public void CheckOut()
+        {
+            if (IsBasketValid())
+            {
+                Cooker temp = _basket.First().Key.Cooker;
+                MakePayment(temp, GetSumTotalBasket());
+            }
+            else
+                return;
+        }
     }
 }
